@@ -446,3 +446,7 @@ bin-int/
 *.dll
 *.so
 *.o
+
+# Allow the Premake executable
+!vendor/bin/premake/premake5.exe
+!vendor/bin/premake/LICENSE.txt
