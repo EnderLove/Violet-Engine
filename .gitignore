@@ -428,6 +428,12 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+# --- Windows build files ---
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
 # --- Linux build files ---
 Makefile
 *.make
