@@ -427,3 +427,15 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# --- Linux build files ---
+Makefile
+*.make
+
+# --- Compiled Binaries (Both OS) ---
+bin/
+bin-int/
+*.exe
+*.dll
+*.so
+*.o
