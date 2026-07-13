@@ -15,6 +15,8 @@ project "Violet"
 	kind     "SharedLib" -- DLL
 	language "C++"
 
+	buildoptions { "/utf-8" }
+
 	targetdir ("bin/"     .. outputDir .. "/%{prj.name}")
 	objdir    ("bin-int/" .. outputDir .. "/%{prj.name}")
 
@@ -58,6 +60,8 @@ project "Sandbox"
 	kind     "ConsoleApp" -- EXE
 	language "C++"
 
+	buildoptions { "/utf-8" }
+
 	targetdir ("bin/"     .. outputDir .. "/%{prj.name}")
 	objdir    ("bin-int/" .. outputDir .. "/%{prj.name}")
 
@@ -67,7 +71,7 @@ project "Sandbox"
 	}
 
 	includedirs {
-		"%{prj.name}/vendor/spdlog/include",
+		"Violet/vendor/spdlog/include",
 		"Violet/src"
 	}
 
