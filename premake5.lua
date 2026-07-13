@@ -10,12 +10,11 @@ workspace "Violet"
 
 outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- //////////////////////////////////////////////   VIOLET   ///////////////////////////////////////////////
 project "Violet"
 	location "Violet"
 	kind     "SharedLib" -- DLL
 	language "C++"
-
-	buildoptions { "/utf-8" }
 
 	targetdir ("bin/"     .. outputDir .. "/%{prj.name}")
 	objdir    ("bin-int/" .. outputDir .. "/%{prj.name}")
@@ -29,10 +28,13 @@ project "Violet"
 		"%{prj.name}/vendor/spdlog/include"
 	}
 
+-- ======================================== WINDOWS SYSTEM ========================================
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On" 
 		systemversion "latest"
+
+		buildoptions { "/utf-8" }
 
 		defines {
 			"VIOLET_PLATFORM_WINDOWS",
@@ -43,6 +45,24 @@ project "Violet"
 			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputDir .. "/Sandbox")
 		}
 
+-- ======================================== LINUX SYSTEM ========================================
+	filter "system:linux"
+        pic "On"
+        cppdialect "C++17"
+        staticruntime "On"
+
+        defines {
+            "VIOLET_PLATFORM_LINUX",
+            "VIOLET_BUILD_DLL"
+        }
+
+        links { "pthread" } -- pthread lib to handle multi-threading (spdlog)
+
+        postbuildcommands {
+            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputDir .. "/Sandbox")
+		}
+
+-- ======================================== CONFIGURATIONS COMPILE ========================================
 	filter "configurations:Debug"
 		defines "VT_DEBUG"
 		symbols "On"
@@ -55,12 +75,11 @@ project "Violet"
 		defines "VT_DIST"
 		optimize "On"
 
+-- //////////////////////////////////////////////   SANDBOX   ///////////////////////////////////////////////
 project "Sandbox"
 	location "Sandbox"
 	kind     "ConsoleApp" -- EXE
 	language "C++"
-
-	buildoptions { "/utf-8" }
 
 	targetdir ("bin/"     .. outputDir .. "/%{prj.name}")
 	objdir    ("bin-int/" .. outputDir .. "/%{prj.name}")
@@ -79,15 +98,28 @@ project "Sandbox"
 		"Violet"
 	}
 
+-- ======================================== WINDOWS SYSTEM ========================================
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On" 
 		systemversion "latest"
 
+		buildoptions { "/utf-8" }
+
 		defines {
 			"VIOLET_PLATFORM_WINDOWS",
 		}
+		
+-- ======================================== LINUX SYSTEM ========================================
+	filter "system:linux"
+        cppdialect "C++17"
+        staticruntime "On" 
 
+        defines {
+            "VIOLET_PLATFORM_LINUX"
+        }
+
+-- ======================================== CONFIGURATIONS COMPILE ========================================
 	filter "configurations:Debug"
 		defines "VT_DEBUG"
 		symbols "On"
