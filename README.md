@@ -1,6 +1,14 @@
-# Violet Engine
+# VIOLET ENGINE
 
-A 2D/3D Graphics Engine written in C++.
+A 3D Graphics Engine written in C++.
+
+## ABOUT
+
+Violet is a real-time rendering engine and personal graphics "toybox" built from the ground up. It serves as a testing ground for experimenting with engine architecture, shaders, and advanced graphics techniques.
+
+This is my first comprehensive engine project, moving beyond isolated graphics demos into a fully structured, multi-platform codebase. The graphics API is currently built on OpenGL, with plans to eventually expand and learn Vulkan.
+
+Why "Violet"? Simple: because I like the color. $\color{#8A2BE2}{\text{Violet}}$
 
 ## Cloning the Repository
 This project uses Git submodules for external libraries, so you must clone the repository recursively to pull down the dependencies.
@@ -8,7 +16,7 @@ This project uses Git submodules for external libraries, so you must clone the r
 Run this command in your terminal:
 
 ```bash
-git clone --recursive https://github.com/YourUsername/VioletEngine.git
+git clone --recursive https://github.com/EnderLove/VioletEngine.git
 ```
 
 If you already cloned the project normally and are missing the dependencies, run:
@@ -59,3 +67,11 @@ Run the app:
 ```bash
 ./bin/Debug-linux-x64/Sandbox/Sandbox
 ```
+---
+
+## Features
+
+Even though Violet is in its early stages, it currently features some foundation:
+* **Custom Build System:** Fully cross-platform project generation using Premake5 (Windows/Linux).
+* **Core Logging System:** Asynchronous, thread-safe, and colored console logging powered by `spdlog`.
+* **Dynamic Architecture:** Configured to compile as a dynamic shared library (`.dll` / `.so`) with a decoupled client Sandbox application.
