@@ -6,6 +6,8 @@
 	#else 
 		#define VIOLET_API __declspec(dllimport)
 	#endif
+#elif defined(VIOLET_PLATFORM_LINUX)
+	#define VIOLET_API __attribute__((visibility("default")))
 #else
-	#error Violet only support Windows!
+	#error Violet only support Windows and Linux!
 #endif
