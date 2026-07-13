@@ -430,6 +430,7 @@ FodyWeavers.xsd
 
 # --- Windows build files ---
 *.sln
+*.slnx
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user
