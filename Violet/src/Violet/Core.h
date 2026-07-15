@@ -11,3 +11,5 @@
 #else
 	#error Violet only support Windows and Linux!
 #endif
+
+#define BIT(x) (1 << x)
