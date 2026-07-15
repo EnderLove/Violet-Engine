@@ -8,7 +8,7 @@ Violet is a real-time rendering engine and personal graphics "toybox" built from
 
 This is my first comprehensive engine project, moving beyond isolated graphics demos into a fully structured, multi-platform codebase. The graphics API is currently built on OpenGL, with plans to eventually expand and learn Vulkan.
 
-Why "Violet"? Simple: because I like the color. $\color{#8A2BE2}{\text{Violet}}$
+Why "Violet"? Simple: because I like the color.
 
 ## Cloning the Repository
 This project uses Git submodules for external libraries, so you must clone the repository recursively to pull down the dependencies.
