@@ -1,8 +1,5 @@
 #pragma once
 
-#include <string>
-#include <functional>
-
 #include "Violet/Core.h"
 #include "Violet/Log.h"
 

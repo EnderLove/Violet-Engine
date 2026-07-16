@@ -41,7 +41,7 @@ Prerequisites: * Visual Studio 2022 (with "Desktop development with C++" workloa
 - Press F5 or hit the Local Windows Debugger button at the top to compile and run.
 
 ---
-### Linux Setup
+### Linux Setup (NOT CURRENTLY AVAILABLE)
 Prerequisites: * make, gcc/clang, and standard build essentials installed on your system.
 
 You may also need the Premake5 binary installed globally depending on your setup.

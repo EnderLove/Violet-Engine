@@ -10,6 +10,12 @@ workspace "Violet"
 
 outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Violet/vendor/GLFW/include"
+
+include "Violet/vendor/GLFW"
+
 -- //////////////////////////////////////////////   VIOLET   ///////////////////////////////////////////////
 project "Violet"
 	location "Violet"
@@ -19,6 +25,9 @@ project "Violet"
 	targetdir ("bin/"     .. outputDir .. "/%{prj.name}")
 	objdir    ("bin-int/" .. outputDir .. "/%{prj.name}")
 
+	pchheader "vtpch.h"
+	pchsource "Violet/src/vtpch.cpp"
+
 	files {
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp"
@@ -26,7 +35,13 @@ project "Violet"
 
 	includedirs {
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links {
+		"GLFW",
+		"opengl32.lib" 
 	}
 
 -- ======================================== WINDOWS SYSTEM ========================================
