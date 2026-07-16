@@ -19,6 +19,9 @@ project "Violet"
 	targetdir ("bin/"     .. outputDir .. "/%{prj.name}")
 	objdir    ("bin-int/" .. outputDir .. "/%{prj.name}")
 
+	pchheader "vtpch.h"
+	pchsource "Violet/src/vtpch.cpp"
+
 	files {
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp"

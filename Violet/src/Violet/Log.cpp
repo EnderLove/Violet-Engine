@@ -1,3 +1,5 @@
+#include "vtpch.h"
+
 #include "Log.h"
 
 namespace Violet {
