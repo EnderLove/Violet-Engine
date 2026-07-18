@@ -81,14 +81,17 @@ project "Violet"
 -- ======================================== CONFIGURATIONS COMPILE ========================================
 	filter "configurations:Debug"
 		defines "VT_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "VT_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "VT_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 -- //////////////////////////////////////////////   SANDBOX   ///////////////////////////////////////////////
@@ -138,12 +141,15 @@ project "Sandbox"
 -- ======================================== CONFIGURATIONS COMPILE ========================================
 	filter "configurations:Debug"
 		defines "VT_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "VT_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "VT_DIST"
+		buildoptions "/MD"
 		optimize "On"
