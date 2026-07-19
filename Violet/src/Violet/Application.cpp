@@ -17,17 +17,28 @@ namespace Violet {
 
 	Application::~Application() {}
 
+	void Application::PushLayer  (Layer* layer)   { layerStack_.PushLayer(layer);     }
+	void Application::PushOverlay(Layer* overlay) { layerStack_.PushOverlay(overlay); }
+
 	// OnEvent(Application::this*, Event& e) compiler pov (BIND_EVENT_FN manage the this*)
 	void Application::OnEvent(Event& e) { // This will be called by the window data_ 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 		VT_CORE_INFO("{0}", e);
+
+		for (auto it = layerStack_.end(); it != layerStack_.end(); ) {
+			(*--it)->OnEvent(e);
+			if (e.handled_) break;
+		}
 	}
 
 	void Application::Run() {
 		while (running_) {
 			glClearColor(0.5f, 0.0f, 1.0f, 1.0f); 
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			for (Layer* layer : layerStack_) layer->OnUpdate();
+
 			window_->OnUpdate();
 		}
 	}

@@ -52,7 +52,7 @@ namespace Violet {
 		template <typename T>
 		bool Dispatch(EventFn<T> func) {
 			if (event_.GetEventType() == T::GetStaticType()) {
-				event_.handled_ = func(static_cast<T&>(event_));
+				event_.handled_ = func(static_cast<T&>(event_)); // Runs the function to get the bool(true, false)
 				//event_.handled_ = func(*(T*)&(event_));
 				return true;
 			}
