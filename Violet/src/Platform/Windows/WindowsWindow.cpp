@@ -5,6 +5,8 @@
 #include "Violet/Events/MouseEvent.h"
 #include "Violet/Events/KeyEvent.h"
 
+#include <glad/glad.h>
+
 namespace Violet {
 	static bool GLFWInitialized = false;
 
@@ -34,6 +36,10 @@ namespace Violet {
 
 		window_ = glfwCreateWindow((int)props.Width, (int)props.Height, data_.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(window_);
+
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		VT_CORE_ASSERT(status, "Failed to initialize Glad!");
+
 		glfwSetWindowUserPointer(window_, &data_); // Set my window data into the glfw window to retrieve in callback
 		SetVSync(true);
 

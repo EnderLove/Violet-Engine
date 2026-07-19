@@ -12,9 +12,13 @@ outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
-IncludeDir["GLFW"] = "Violet/vendor/GLFW/include"
+IncludeDir["GLFW"]  = "Violet/vendor/GLFW/include"
+IncludeDir["GLAD"]  = "Violet/vendor/GLAD/include"
+IncludeDir["ImGui"] = "Violet/vendor/imgui/include"
 
 include "Violet/vendor/GLFW"
+include "Violet/vendor/GLAD"
+include "Violet/vendor/imgui"
 
 -- //////////////////////////////////////////////   VIOLET   ///////////////////////////////////////////////
 project "Violet"
@@ -36,11 +40,15 @@ project "Violet"
 	includedirs {
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.GLAD}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links {
 		"GLFW",
+		"GLAD",
+		"ImGui",
 		"opengl32.lib" 
 	}
 
@@ -54,7 +62,8 @@ project "Violet"
 
 		defines {
 			"VIOLET_PLATFORM_WINDOWS",
-			"VIOLET_BUILD_DLL"
+			"VIOLET_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands {
@@ -69,7 +78,8 @@ project "Violet"
 
         defines {
             "VIOLET_PLATFORM_LINUX",
-            "VIOLET_BUILD_DLL"
+            "VIOLET_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
         }
 
         links { "pthread" } -- pthread lib to handle multi-threading (spdlog)

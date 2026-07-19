@@ -5,7 +5,8 @@
 #include "Events/MouseEvent.h"
 #include "Log.h"
 
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 namespace Violet {
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
