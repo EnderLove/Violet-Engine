@@ -24,9 +24,9 @@ namespace Violet {
 	void Application::OnEvent(Event& e) { // This will be called by the window data_ 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
-		VT_CORE_INFO("{0}", e);
+		//VT_CORE_INFO("{0}", e);
 
-		for (auto it = layerStack_.end(); it != layerStack_.end(); ) {
+		for (auto it = layerStack_.end(); it != layerStack_.begin(); ) {
 			(*--it)->OnEvent(e);
 			if (e.handled_) break;
 		}

@@ -38,7 +38,7 @@ namespace Violet {
 
 		inline bool IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
 
-	protected:
+	//protected:
 		bool handled_ = false;
 	};
 
