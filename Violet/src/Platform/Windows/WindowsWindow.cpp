@@ -80,6 +80,12 @@ namespace Violet {
 			}
 		});
 
+		glfwSetCharCallback(window_, [](GLFWwindow* window, unsigned int codepoint) {
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			KeyTypedEvent event (codepoint);
+			data.EventCallback(event);
+		});
+
 		glfwSetMouseButtonCallback(window_, [](GLFWwindow* window, int button, int action, int mods) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
