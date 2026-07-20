@@ -19,6 +19,9 @@
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 
+		inline static Application& Get() { return *Instance_; }
+		inline Window& GetWindow() { return *window_; }
+
 	private:
 		std::unique_ptr<Window> window_;
 		bool running_ = true;
@@ -26,6 +29,9 @@
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		LayerStack layerStack_;
+
+	private:
+		static Application* Instance_; // SINGLETON
 	};
 
 	// TO BE DEFINE IN CLIENT

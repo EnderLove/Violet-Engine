@@ -11,15 +11,26 @@
 namespace Violet {
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
+	Application* Application::Instance_ = nullptr;
+
 	Application::Application() {
+		VT_CORE_ASSERT(!Instance_, "Application already exists!");
+		Instance_ = this;
 		window_ = std::unique_ptr<Window>(Window::Create()); // Why the cast?
 		window_->SetEventCallback(BIND_EVENT_FN(OnEvent)); // Loads the fn into the window data_ EventCallback
 	}
 
 	Application::~Application() {}
 
-	void Application::PushLayer  (Layer* layer)   { layerStack_.PushLayer(layer);     }
-	void Application::PushOverlay(Layer* overlay) { layerStack_.PushOverlay(overlay); }
+	void Application::PushLayer  (Layer* layer)   { 
+		layerStack_.PushLayer(layer);
+		layer->OnAttach();
+	}
+
+	void Application::PushOverlay(Layer* overlay) { 
+		layerStack_.PushOverlay(overlay);
+		overlay->OnAttach();
+	}
 
 	// OnEvent(Application::this*, Event& e) compiler pov (BIND_EVENT_FN manage the this*)
 	void Application::OnEvent(Event& e) { // This will be called by the window data_ 
