@@ -41,4 +41,16 @@ namespace Violet {
 		}
 		EVENT_CLASS_TYPE(KEY_RELEASED)
 	};
+
+	class VIOLET_API KeyTypedEvent : public KeyEvent {
+	public:
+		KeyTypedEvent(unsigned int keyCode) : KeyEvent(keyCode) {}
+
+		std::string ToString() const override {
+			std::stringstream ss;
+			ss << "KeyPressedEvent: " << keyCode_;
+			return ss.str();
+		}
+		EVENT_CLASS_TYPE(KEY_TYPED)
+	};
 }

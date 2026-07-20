@@ -11,13 +11,13 @@ namespace Violet {
 		unsigned int Width;
 		unsigned int Height;
 
-		WindowProps(const std::string Title = "Violet Engine", unsigned int Width = 1920, unsigned int Height = 1080) :
+		WindowProps(const std::string Title = "Violet Engine", unsigned int Width = 1080, unsigned int Height = 720) :
 			Title(Title), Width(Width), Height(Height){ }
 	};
 
 	class VIOLET_API Window {
 	public:
-		using EventCallbackFn = std::function<void(Event&)>;
+		using EventCallbackFn = std::function<void(Event&)>; // void function that recieves a Event&
 
 		virtual ~Window() {}
 

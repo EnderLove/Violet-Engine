@@ -9,7 +9,7 @@ namespace Violet {
 		NONE = 0,
 		WIN_CLOSE, WIN_RESIZE, WIN_FOCUS, WIN_LOST_FOCUS, WIN_MOVED, // WINDOW EVENT TYPES 
 		APP_TICK, APP_UPDATE, APP_RENDER,                            // APPPLICATION EVENT TYPES
-		KEY_PRESSED, KEY_RELEASED,                                   // KEYBOARD EVENT TYPES
+		KEY_PRESSED, KEY_RELEASED, KEY_TYPED,                        // KEYBOARD EVENT TYPES
 		MS_BTN_PRESSED, MS_BTN_RELEASED, MS_MOVED, MS_SCROLLED       // MOUSE EVENT TYPES
 	};
 
@@ -38,7 +38,7 @@ namespace Violet {
 
 		inline bool IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
 
-	protected:
+	//protected:
 		bool handled_ = false;
 	};
 
@@ -52,7 +52,7 @@ namespace Violet {
 		template <typename T>
 		bool Dispatch(EventFn<T> func) {
 			if (event_.GetEventType() == T::GetStaticType()) {
-				event_.handled_ = func(static_cast<T&>(event_));
+				event_.handled_ = func(static_cast<T&>(event_)); // Runs the function to get the bool(true, false)
 				//event_.handled_ = func(*(T*)&(event_));
 				return true;
 			}
