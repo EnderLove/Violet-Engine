@@ -14,6 +14,8 @@ namespace Violet {
 		inline unsigned int GetWidth()  const override { return data_.Width;  }
 		inline unsigned int GetHeight() const override { return data_.Height; }
 
+		inline virtual void* GetNativeWindow() const override { return window_; }
+
 		// Window attribs
 		inline void SetEventCallback(const EventCallbackFn& callback) override { data_.EventCallback = callback; }
 		void SetVSync(bool enable) override;
