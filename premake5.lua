@@ -69,7 +69,7 @@ project "Violet"
 		}
 
 		postbuildcommands {
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputDir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputDir .. "/Sandbox/\"")
 		}
 
 -- ======================================== LINUX SYSTEM ========================================
