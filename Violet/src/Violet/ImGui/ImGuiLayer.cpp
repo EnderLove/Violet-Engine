@@ -91,7 +91,6 @@ namespace Violet {
 		ImGuiIO& io = ImGui::GetIO();
 		ImGuiKey keyCode = (ImGuiKey)VioletKeyToImGuiKey(e.GetKeyCode());
 		io.AddKeyEvent(keyCode, true);
-
 		return false;
 	}
 
@@ -120,12 +119,8 @@ namespace Violet {
 	bool ImGuiLayer::OnKeyTypedEvent(KeyTypedEvent& e) {
 		ImGuiIO& io = ImGui::GetIO();
 		int character = e.GetKeyCode();
-
 		if (character > 0 && character < 0x10000)
 			io.AddInputCharacter((unsigned int) character);
-
-		VT_CORE_TRACE("{0}", character);
-
 		return false;
 	}
 
@@ -137,6 +132,4 @@ namespace Violet {
 		glViewport(0, 0, e.GetWidth(), e.GetHeight());
 		return false;
 	}
-
-
 }	
