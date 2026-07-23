@@ -5,6 +5,8 @@
 #include "Events/MouseEvent.h"
 #include "Log.h"
 
+#include "Input.h"
+
 //#include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
@@ -50,6 +52,9 @@ namespace Violet {
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			for (Layer* layer : layerStack_) layer->OnUpdate();
+
+			auto [x, y] = Input::GetMousePosition();
+			VT_CORE_TRACE("{0}, {1}", x, y);
 
 			window_->OnUpdate();
 		}

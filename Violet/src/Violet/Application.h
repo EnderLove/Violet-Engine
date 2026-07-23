@@ -20,7 +20,7 @@
 		void PushOverlay(Layer* overlay);
 
 		inline static Application& Get() { return *Instance_; }
-		inline Window& GetWindow() { return *window_; }
+		inline Window& GetWindow() { return *window_; } // This is not the native window, just return the ptr of the instanced window class
 
 	private:
 		std::unique_ptr<Window> window_;
