@@ -49,9 +49,6 @@ namespace Violet {
 
 			for (Layer* layer : layerStack_) layer->OnUpdate(); // Iteration across all layers from the application stack for update
 
-			auto [x, y] = Input::GetMousePosition();
-			VT_CORE_TRACE("{0}, {1}", x, y);
-
 			window_->OnUpdate();
 		}
 	}
