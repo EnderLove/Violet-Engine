@@ -22,7 +22,8 @@ namespace Violet {
 		EVENT_CAT_MOUSE_BTN   = BIT(4)
 	};
 
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
+// When using :: there is no need for do ## because the macro parameter will be substituted automatically
+#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
 							   virtual EventType GetEventType() const override { return GetStaticType(); }\
 							   virtual const char* GetName() const override { return #type; }
 
