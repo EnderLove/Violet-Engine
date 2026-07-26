@@ -3,6 +3,9 @@
 // FOR THE USE OF VIOLET APPLICATIONS 
 #include "Violet/Application.h"
 #include "Violet/Layer.h"
+#include "Violet/Input.h"
+#include "Violet/MouseButtonCodes.h"
+#include "Violet/KeyCodes.h"
 #include "Violet/Log.h"
 #include "Violet/ImGui/ImGuiLayer.h"
 

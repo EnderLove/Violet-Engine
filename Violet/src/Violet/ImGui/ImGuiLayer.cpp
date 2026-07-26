@@ -10,6 +10,7 @@
 
 #include "Violet/Application.h"
 #include "Violet/Events/MouseEvent.h"
+#include "Violet/KeyCodes.h"
 
 namespace Violet {
 	ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
@@ -51,14 +52,14 @@ namespace Violet {
 
 	void ImGuiLayer::OnEvent(Event& event) {
 		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<MouseButtonPressedEvent>(VT_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));
+		dispatcher.Dispatch<MouseButtonPressedEvent> (VT_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));
 		dispatcher.Dispatch<MouseButtonReleasedEvent>(VT_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonReleasedEvent));
-		dispatcher.Dispatch<MouseMovedEvent>(VT_BIND_EVENT_FN(ImGuiLayer::OnMouseMovedEvent));
-		dispatcher.Dispatch<MouseScrollEvent>(VT_BIND_EVENT_FN(ImGuiLayer::OnMouseScrolledEvent));
-		dispatcher.Dispatch<KeyPressEvent>(VT_BIND_EVENT_FN(ImGuiLayer::OnKeyPressedEvent));
-		dispatcher.Dispatch<KeyReleaseEvent>(VT_BIND_EVENT_FN(ImGuiLayer::OnKeyReleasedEvent));
-		dispatcher.Dispatch<KeyTypedEvent>(VT_BIND_EVENT_FN(ImGuiLayer::OnKeyTypedEvent));
-		dispatcher.Dispatch<WindowResizeEvent>(VT_BIND_EVENT_FN(ImGuiLayer::OnWindowResizedEvent));
+		dispatcher.Dispatch<MouseMovedEvent>         (VT_BIND_EVENT_FN(ImGuiLayer::OnMouseMovedEvent));
+		dispatcher.Dispatch<MouseScrollEvent>        (VT_BIND_EVENT_FN(ImGuiLayer::OnMouseScrolledEvent));
+		dispatcher.Dispatch<KeyPressEvent>           (VT_BIND_EVENT_FN(ImGuiLayer::OnKeyPressedEvent));
+		dispatcher.Dispatch<KeyReleaseEvent>         (VT_BIND_EVENT_FN(ImGuiLayer::OnKeyReleasedEvent));
+		dispatcher.Dispatch<KeyTypedEvent>           (VT_BIND_EVENT_FN(ImGuiLayer::OnKeyTypedEvent));
+		dispatcher.Dispatch<WindowResizeEvent>       (VT_BIND_EVENT_FN(ImGuiLayer::OnWindowResizedEvent));
 	}
 
 	bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e) {
@@ -91,21 +92,21 @@ namespace Violet {
 		ImGuiIO& io = ImGui::GetIO();
 		ImGuiKey keyCode = (ImGuiKey)VioletKeyToImGuiKey(e.GetKeyCode());
 		io.AddKeyEvent(keyCode, true);
-
 		return false;
 	}
 
 	int ImGuiLayer::VioletKeyToImGuiKey(int keyCode) {
 		switch (keyCode) {
-		case GLFW_KEY_SPACE:        return ImGuiKey_Space;
-		case GLFW_KEY_A:            return ImGuiKey_A;
-		case GLFW_KEY_LEFT_CONTROL: return ImGuiKey_LeftCtrl;
-		case GLFW_KEY_BACKSPACE:    return ImGuiKey_Backspace;
-		case GLFW_KEY_UP:           return ImGuiKey_UpArrow;
-		case GLFW_KEY_DOWN:         return ImGuiKey_DownArrow;
-		case GLFW_KEY_RIGHT:        return ImGuiKey_RightArrow;
-		case GLFW_KEY_LEFT:         return ImGuiKey_LeftArrow;
-		case GLFW_KEY_LEFT_SHIFT:   return ImGuiKey_LeftShift;
+		case VT_KEY_SPACE:        return ImGuiKey_Space;
+		case VT_KEY_TAB:          return ImGuiKey_Tab;
+		case VT_KEY_A:            return ImGuiKey_A;
+		case VT_KEY_LEFT_CONTROL: return ImGuiKey_LeftCtrl;
+		case VT_KEY_BACKSPACE:    return ImGuiKey_Backspace;
+		case VT_KEY_UP:           return ImGuiKey_UpArrow;
+		case VT_KEY_DOWN:         return ImGuiKey_DownArrow;
+		case VT_KEY_RIGHT:        return ImGuiKey_RightArrow;
+		case VT_KEY_LEFT:         return ImGuiKey_LeftArrow;
+		case VT_KEY_LEFT_SHIFT:   return ImGuiKey_LeftShift;
 		default:                    return ImGuiKey_None;
 		}
 	}
@@ -120,12 +121,8 @@ namespace Violet {
 	bool ImGuiLayer::OnKeyTypedEvent(KeyTypedEvent& e) {
 		ImGuiIO& io = ImGui::GetIO();
 		int character = e.GetKeyCode();
-
 		if (character > 0 && character < 0x10000)
 			io.AddInputCharacter((unsigned int) character);
-
-		VT_CORE_TRACE("{0}", character);
-
 		return false;
 	}
 
@@ -137,6 +134,4 @@ namespace Violet {
 		glViewport(0, 0, e.GetWidth(), e.GetHeight());
 		return false;
 	}
-
-
 }	

@@ -49,6 +49,18 @@ namespace Violet {
 	public:
 		EventDispatcher(Event& event) : event_(event) {}
 
+		// Lambda Version
+		template <typename T, typename F>
+		bool Dispatch(const F& func) {
+			if (event_.GetEventType() == T::GetStaticType()) {
+				event_.handled_ = func(static_cast<T&>(event_)); // Runs the function to get the bool(true, false)
+				return true;
+			}
+			return false;
+		}
+
+		// STD::BIND Version
+		/*
 		template <typename T>
 		bool Dispatch(EventFn<T> func) {
 			if (event_.GetEventType() == T::GetStaticType()) {
@@ -58,6 +70,7 @@ namespace Violet {
 			}
 			return false;
 		}
+		*/
 
 	private:
 		Event& event_;

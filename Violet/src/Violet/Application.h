@@ -19,14 +19,14 @@
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 
-		inline static Application& Get() { return *Instance_; }
-		inline Window& GetWindow() { return *window_; }
+		inline static Application& Get() { return *Instance_; } // Just to get the instance
+		inline Window& GetWindow() { return *window_; } // This is not the native window, just return the ptr of the instanced window class
 
 	private:
-		std::unique_ptr<Window> window_;
+		std::unique_ptr<Window> window_; // Change to raw prob
 		bool running_ = true;
 
-		bool OnWindowClose(WindowCloseEvent& e);
+		bool OnWindowCloseEvent(WindowCloseEvent& e);
 
 		LayerStack layerStack_;
 
@@ -34,7 +34,5 @@
 		static Application* Instance_; // SINGLETON
 	};
 
-	// TO BE DEFINE IN CLIENT
-	Application* CreateApplication();
+	Application* CreateApplication(); // Defined in client (for entry point will be "extern")
 }
-

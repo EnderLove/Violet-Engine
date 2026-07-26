@@ -51,7 +51,7 @@ project "Violet"
 		"GLFW",
 		"GLAD",
 		"ImGui",
-		"opengl32.lib" 
+		"opengl32" 
 	}
 
 -- ======================================== WINDOWS SYSTEM ========================================
@@ -60,8 +60,10 @@ project "Violet"
 		staticruntime "On" 
 		systemversion "latest"
 
-		buildoptions { "/utf-8" }
+		filter { "system:windows", "action:vs*" }
+			buildoptions { "/utf-8" }
 
+		filter "system:windows"
 		defines {
 			"VIOLET_PLATFORM_WINDOWS",
 			"VIOLET_BUILD_DLL",
@@ -69,7 +71,7 @@ project "Violet"
 		}
 
 		postbuildcommands {
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputDir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputDir .. "/Sandbox/\"")
 		}
 
 -- ======================================== LINUX SYSTEM ========================================
@@ -93,17 +95,17 @@ project "Violet"
 -- ======================================== CONFIGURATIONS COMPILE ========================================
 	filter "configurations:Debug"
 		defines "VT_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "VT_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "VT_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 -- //////////////////////////////////////////////   SANDBOX   ///////////////////////////////////////////////
@@ -135,8 +137,10 @@ project "Sandbox"
 		staticruntime "On" 
 		systemversion "latest"
 
-		buildoptions { "/utf-8" }
+		filter { "system:windows", "action:vs*" }
+			buildoptions { "/utf-8" }
 
+		filter "system:windows"
 		defines {
 			"VIOLET_PLATFORM_WINDOWS",
 		}
@@ -153,15 +157,15 @@ project "Sandbox"
 -- ======================================== CONFIGURATIONS COMPILE ========================================
 	filter "configurations:Debug"
 		defines "VT_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "VT_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "VT_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"

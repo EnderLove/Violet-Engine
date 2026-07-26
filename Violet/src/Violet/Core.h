@@ -6,7 +6,7 @@
 	#else 
 		#define VIOLET_API __declspec(dllimport)
 	#endif
-#elif defined(VIOLET_PLATFORM_LINUX)
+#elif defined(VIOLET_PLATFORM_LINUX) // TODO: NOT CURRENTLY AVALIABLE (FIX!)
 	#define VIOLET_API __attribute__((visibility("default")))
 #else
 	#error Violet only support Windows and Linux!
@@ -22,4 +22,7 @@
 
 #define BIT(x) (1 << x)
 
-#define VT_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+// This BIND macro solves the problem with the ghost paramenter 'this' that lives inside class methods
+// OnEvent(Application::this*, Event& e)
+//#define VT_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1) // std::bind version
+#define VT_BIND_EVENT_FN(fn) [this](auto&& e) { return fn(e); }				 // lambda version (optimal?)

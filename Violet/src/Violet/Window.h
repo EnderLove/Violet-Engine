@@ -29,7 +29,9 @@ namespace Violet {
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 		virtual void SetVSync(bool enable) = 0;
 		virtual bool IsVSync() const = 0;
-		
+
+		virtual void* GetNativeWindow() const = 0;
+
 		static Window* Create(const WindowProps & = WindowProps());
 	};
 }
