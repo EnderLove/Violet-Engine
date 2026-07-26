@@ -51,7 +51,8 @@ project "Violet"
 		"GLFW",
 		"GLAD",
 		"ImGui",
-		"opengl32" 
+		"opengl32",
+		"gdi32"
 	}
 
 -- ======================================== WINDOWS SYSTEM ========================================
