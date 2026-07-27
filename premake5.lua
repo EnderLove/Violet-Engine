@@ -17,10 +17,12 @@ IncludeDir = {}
 IncludeDir["GLFW"]  = "Violet/vendor/GLFW/include"
 IncludeDir["GLAD"]  = "Violet/vendor/GLAD/include"
 IncludeDir["ImGui"] = "Violet/vendor/imgui"
+IncludeDir["glm"]   = "Violet/vendor/glm"
 
 include "Violet/vendor/GLFW"
 include "Violet/vendor/GLAD"
 include "Violet/vendor/imgui"
+--include "Violet/vendor/glm"
 
 -- //////////////////////////////////////////////   VIOLET   ///////////////////////////////////////////////
 project "Violet"
@@ -44,7 +46,8 @@ project "Violet"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.GLAD}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links {
@@ -125,7 +128,8 @@ project "Sandbox"
 
 	includedirs {
 		"Violet/vendor/spdlog/include",
-		"Violet/src"
+		"Violet/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links {
