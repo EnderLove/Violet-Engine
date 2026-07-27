@@ -1,6 +1,7 @@
 project "GLAD"
 	kind "StaticLib"
 	language "C"
+	location "%{wks.location}/Violet/vendor/GLAD"
 
 	targetdir ("bin/"     .. outputDir .. "/%{prj.name}")
 	objdir    ("bin-int/" .. outputDir .. "/%{prj.name}")
