@@ -1,13 +1,15 @@
 #pragma once
 
 #ifdef VIOLET_PLATFORM_WINDOWS
+#if VT_DYNAMIC_LINK
 	#ifdef VIOLET_BUILD_DLL
 		#define VIOLET_API __declspec(dllexport)
 	#else 
 		#define VIOLET_API __declspec(dllimport)
 	#endif
-#elif defined(VIOLET_PLATFORM_LINUX) // TODO: NOT CURRENTLY AVALIABLE (FIX!)
-	#define VIOLET_API __attribute__((visibility("default")))
+#else 
+	#define VIOLET_API
+#endif
 #else
 	#error Violet only support Windows and Linux!
 #endif

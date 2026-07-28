@@ -1,6 +1,7 @@
 project "GLAD"
 	kind "StaticLib"
 	language "C"
+	staticruntime "On"
 	location "%{wks.location}/Violet/vendor/GLAD"
 
 	targetdir ("bin/"     .. outputDir .. "/%{prj.name}")
@@ -18,7 +19,11 @@ project "GLAD"
 
 	filter "system:windows"
 		systemversion "latest"
-		staticruntime "On"
+
+	filter { "system:windows", "configurations:Debug" }
+		runtime "Debug"
+		symbols "on"
 
 	filter { "system:windows", "configurations:Release" }
 		runtime "Release"
+		optimize "on"
