@@ -19,8 +19,6 @@ namespace Violet {
 		void Begin();
 		void End();
 
-		int VioletKeyToImGuiKey(int keyCode); // TEMPORAL TRANSLATION FUNCTION
-
 	private:
 		float time_ = 0.0f;
 	};

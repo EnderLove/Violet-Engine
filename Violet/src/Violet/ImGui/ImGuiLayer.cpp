@@ -91,20 +91,4 @@ namespace Violet {
 		static bool show = true;
 		ImGui::ShowDemoWindow(&show);
 	}
-
-	int ImGuiLayer::VioletKeyToImGuiKey(int keyCode) {
-		switch (keyCode) {
-		case VT_KEY_SPACE:        return ImGuiKey_Space;
-		case VT_KEY_TAB:          return ImGuiKey_Tab;
-		case VT_KEY_A:            return ImGuiKey_A;
-		case VT_KEY_LEFT_CONTROL: return ImGuiKey_LeftCtrl;
-		case VT_KEY_BACKSPACE:    return ImGuiKey_Backspace;
-		case VT_KEY_UP:           return ImGuiKey_UpArrow;
-		case VT_KEY_DOWN:         return ImGuiKey_DownArrow;
-		case VT_KEY_RIGHT:        return ImGuiKey_RightArrow;
-		case VT_KEY_LEFT:         return ImGuiKey_LeftArrow;
-		case VT_KEY_LEFT_SHIFT:   return ImGuiKey_LeftShift;
-		default:                    return ImGuiKey_None;
-		}
-	}
 }
