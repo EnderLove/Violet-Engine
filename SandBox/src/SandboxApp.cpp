@@ -1,5 +1,7 @@
 #include <Violet.h>
 
+#include "imgui/imgui.h"
+
 class TempLayer : public Violet::Layer {
 public:
 	TempLayer() : Layer("TempLayer") {}
@@ -15,13 +17,18 @@ public:
 			VT_WARN("KEY '{0}' PRESSED", (char)e.GetKeyCode());
 		}
 	}
+
+	virtual void OnImGuiRender() override {
+		//ImGui::Begin("Test");
+		//ImGui::Text("Hello ImGui!");
+		//ImGui::End();
+	}
 };
 
 class Sandbox : public Violet::Application {
 public:
 	Sandbox() { 
 		PushLayer(new TempLayer()); 
-		PushOverlay(new Violet::ImGuiLayer());
 	}
 	~Sandbox() {}
 };

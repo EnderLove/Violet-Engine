@@ -21,8 +21,6 @@ namespace Violet {
 
 	private:
 		std::vector<Layer*> layers_;
-		std::vector<Layer*>::iterator layerInsert_;
-
-		// TODO : Consider changing (layerIsert_) to unsigned int to avoid memory reallocations
+		unsigned int layerInsertIndex_ = 0;
 	};
 }

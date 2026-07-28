@@ -3,14 +3,15 @@
 #include "LayerStack.h"
 
 namespace Violet {
-	LayerStack::LayerStack() { layerInsert_ = layers_.begin(); } // Beware of new vector allocations 
+	LayerStack::LayerStack() {}
 
 	LayerStack::~LayerStack() {
 		for (Layer* layer : layers_) delete layer;
 	}
 
 	void LayerStack::PushLayer(Layer* layer) {
-		layerInsert_ = layers_.emplace(layerInsert_, layer); // Sets at the end of layers and updates the layerInsert_
+		layers_.emplace(layers_.begin() + layerInsertIndex_, layer); // Sets at the end of layers and updates the layerInsert_
+		layerInsertIndex_++;
 	}
 
 	void LayerStack::PushOverlay(Layer* overlay) {
@@ -21,7 +22,7 @@ namespace Violet {
 		auto it = std::find(layers_.begin(), layers_.end(), layer);
 		if (it != layers_.end()) {
 			layers_.erase(it);
-			layerInsert_--;
+			layerInsertIndex_--;
 		}
 	}
 

@@ -18,6 +18,9 @@ namespace Violet {
 		Instance_ = this;
 		window_ = std::unique_ptr<Window>(Window::Create()); // Why the cast?
 		window_->SetEventCallback(VT_BIND_EVENT_FN(Application::OnEvent)); // Working with labmda version
+
+		ImGuiLayer_ = new ImGuiLayer();
+		PushOverlay(ImGuiLayer_);
 	}
 
 	Application::~Application() {}
@@ -47,7 +50,9 @@ namespace Violet {
 			glClearColor(0.5f, 0.0f, 0.7f, 1.0f); // VIOLET
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			for (Layer* layer : layerStack_) layer->OnUpdate(); // Iteration across all layers from the application stack for update
+			ImGuiLayer_->Begin();
+			for (Layer* layer : layerStack_) layer->OnImGuiRender(); // Iteration across all layers from the application stack for update
+			ImGuiLayer_->End();
 
 			window_->OnUpdate();
 		}

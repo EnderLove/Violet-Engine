@@ -10,6 +10,14 @@ This is my first comprehensive engine project, moving beyond isolated graphics d
 
 Why "Violet"? Simple: because I like the color.
 
+## CURRENT STATE
+
+![plot](delete/current_project_state.png)
+
+- We got docking!!!!!
+
+---
+
 ## Cloning the Repository
 This project uses Git submodules for external libraries, so you must clone the repository recursively to pull down the dependencies.
 
@@ -26,19 +34,43 @@ git submodule update --init --recursive
 ```
 ---
 ## Windows Setup
-Prerequisites: * Visual Studio 2022 (with "Desktop development with C++" workload installed).
 
-### Build Instructions:
+### Visual Studio
+#### Prerequisites: 
 
-- Open the project folder.
+* Visual Studio 2022 (with "Desktop development with C++" workload installed).
+* *Note: A Premake executable is included in the repository, so you do not need to install it manually.*
 
-- Double-click the GenerateProjects.bat file (or whatever your .bat is named). This will use Premake to generate the Visual Studio solution files.
+#### Build Instructions:
 
-- Open Violet.sln in Visual Studio.
+1. Open the project folder.
+2. Double-click `GeneProjs_vs.bat`. This will use Premake to generate the Visual Studio solution files.
+3. Open `Violet.sln` in Visual Studio.
+4. In the Solution Explorer, right-click the **Sandbox** project and select **Set as Startup Project**.
+5. Press `F5` or click the **Local Windows Debugger** button at the top to compile and run.
 
-- In the Solution Explorer, right-click the Sandbox project and select Set as Startup Project.
+### MSYS2 / MinGW (General Compiler)
 
-- Press F5 or hit the Local Windows Debugger button at the top to compile and run.
+#### Prerequisites:
+* The project uses standard C++ and should work on most modern compilers, but it is officially tested using the MSYS2 UCRT64 environment.
+* *Note: A Premake executable is included in the repository, so you do not need to install it manually.*
+
+#### MSYS2 Setup:
+1. Install [MSYS2](https://www.msys2.org/) and launch the **MSYS2 UCRT64** terminal from your Start menu.
+2. Run the following command to install the compiler and Make:
+   ```bash
+   pacman -S mingw-w64-ucrt-x86_64-gcc make
+   ```
+
+#### Build Instructions:
+
+1. Open the project folder.
+2. Double-click GeneProjs_make.bat. This will use Premake to generate the required Makefiles.
+3. Open your terminal in the project folder and run:
+``` bash
+make
+```
+4. Once compilation finishes, the executable will be located inside the bin/ directory.
 
 ---
 ### Linux Setup (NOT CURRENTLY AVAILABLE)

@@ -6,6 +6,8 @@
 #include "Events/ApplicationEvent.h" // need vtpch.h (Window.h)
 #include "LayerStack.h"
 
+#include "ImGui/ImGuiLayer.h"
+
  namespace Violet {
 	class VIOLET_API Application {
 	public:
@@ -24,6 +26,8 @@
 
 	private:
 		std::unique_ptr<Window> window_; // Change to raw prob
+		ImGuiLayer* ImGuiLayer_;
+
 		bool running_ = true;
 
 		bool OnWindowCloseEvent(WindowCloseEvent& e);
