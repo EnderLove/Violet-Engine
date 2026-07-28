@@ -31,11 +31,11 @@ namespace Violet {
 
 	float WindowsInput::GetMouseXImpl() {
 		auto [x, y] = GetMousePositionImpl(); // C++ 17 feature
-		return x;
+		return (float)x;
 	}
 
 	float WindowsInput::GetMouseYImpl() {
 		auto [x, y] = GetMousePositionImpl(); // C++ 17 feature
-		return y;
+		return (float)y;
 	}
 }

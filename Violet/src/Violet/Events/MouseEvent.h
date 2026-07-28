@@ -5,7 +5,7 @@
 namespace Violet {
 	class VIOLET_API MouseMovedEvent : public Event {
 	public:
-		MouseMovedEvent(int x, int y) : mouseX_(x), mouseY_(y) {}
+		MouseMovedEvent(float x, float y) : mouseX_(x), mouseY_(y) {}
 
 		inline float GetX() const { return mouseX_; }
 		inline float GetY() const { return mouseY_; }
