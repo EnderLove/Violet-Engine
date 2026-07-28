@@ -24,7 +24,7 @@ This project uses Git submodules for external libraries, so you must clone the r
 Run this command in your terminal:
 
 ```bash
-git clone --recursive https://github.com/EnderLove/VioletEngine.git
+git clone --recursive https://github.com/EnderLove/Violet-Engine.git
 ```
 
 If you already cloned the project normally and are missing the dependencies, run:

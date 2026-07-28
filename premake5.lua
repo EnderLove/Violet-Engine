@@ -27,8 +27,10 @@ include "Violet/vendor/imgui"
 -- //////////////////////////////////////////////   VIOLET   ///////////////////////////////////////////////
 project "Violet"
 	location "Violet"
-	kind     "SharedLib" -- DLL
+	kind     "StaticLib" -- Statick Library
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/"     .. outputDir .. "/%{prj.name}")
 	objdir    ("bin-int/" .. outputDir .. "/%{prj.name}")
@@ -50,18 +52,18 @@ project "Violet"
 		"%{IncludeDir.glm}"
 	}
 
+	defines { "_CRT_SECURE_NO_WARNINGS" }
+
 	links {
-		"GLFW",
-		"GLAD",
 		"ImGui",
+		"GLAD",
+		"GLFW",
 		"opengl32",
 		"gdi32"
 	}
 
 -- ======================================== WINDOWS SYSTEM ========================================
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On" 
 		systemversion "latest"
 
 		filter { "system:windows", "action:vs*" }
@@ -72,10 +74,6 @@ project "Violet"
 			"VIOLET_PLATFORM_WINDOWS",
 			"VIOLET_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
-		}
-
-		postbuildcommands {
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputDir .. "/Sandbox/\"")
 		}
 
 -- ======================================== LINUX SYSTEM ========================================
@@ -100,23 +98,25 @@ project "Violet"
 	filter "configurations:Debug"
 		defines "VT_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "VT_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "VT_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 -- //////////////////////////////////////////////   SANDBOX   ///////////////////////////////////////////////
 project "Sandbox"
 	location "Sandbox"
 	kind     "ConsoleApp" -- EXE
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/"     .. outputDir .. "/%{prj.name}")
 	objdir    ("bin-int/" .. outputDir .. "/%{prj.name}")
@@ -134,13 +134,16 @@ project "Sandbox"
 	}
 
 	links {
-		"Violet"
+		"Violet",
+		"ImGui",
+		"GLAD",
+		"GLFW",
+		"opengl32",
+		"gdi32"
 	}
 
 -- ======================================== WINDOWS SYSTEM ========================================
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On" 
 		systemversion "latest"
 
 		filter { "system:windows", "action:vs*" }
@@ -164,14 +167,14 @@ project "Sandbox"
 	filter "configurations:Debug"
 		defines "VT_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "VT_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "VT_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
