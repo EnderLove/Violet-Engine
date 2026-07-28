@@ -55,9 +55,9 @@ project "Violet"
 	defines { "_CRT_SECURE_NO_WARNINGS" }
 
 	links {
-		"GLFW",
-		"GLAD",
 		"ImGui",
+		"GLAD",
+		"GLFW",
 		"opengl32",
 		"gdi32"
 	}
@@ -134,7 +134,12 @@ project "Sandbox"
 	}
 
 	links {
-		"Violet"
+		"Violet",
+		"ImGui",
+		"GLAD",
+		"GLFW",
+		"opengl32",
+		"gdi32"
 	}
 
 -- ======================================== WINDOWS SYSTEM ========================================
