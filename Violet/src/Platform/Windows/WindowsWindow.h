@@ -3,6 +3,8 @@
 #include <GLFW/glfw3.h>
 #include "Violet/Window.h"
 
+#include "Violet/Renderer/RenderContext.h"
+
 namespace Violet {
 	class WindowsWindow : public Window {
 	public:
@@ -27,6 +29,7 @@ namespace Violet {
 
 	private:
 		GLFWwindow* window_;
+		RenderContext* renderContext_;
 
 		struct WindowData {
 			std::string Title;

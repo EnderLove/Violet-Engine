@@ -4,8 +4,8 @@
 #include "Violet/Events/ApplicationEvent.h"
 #include "Violet/Events/MouseEvent.h"
 #include "Violet/Events/KeyEvent.h"
-
-#include <glad/glad.h>
+ 
+#include "Platform/OpenGL/GLContext.h"
 
 namespace Violet {
 	static bool GLFWInitialized = false;
@@ -27,6 +27,7 @@ namespace Violet {
 
 		VT_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
+
 		if (!GLFWInitialized) {
 			int success = glfwInit();
 			VT_CORE_ASSERT(success, "Could not initialized GLFW!");
@@ -35,10 +36,10 @@ namespace Violet {
 		}
 
 		window_ = glfwCreateWindow((int)props.Width, (int)props.Height, data_.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(window_);
+		
+		renderContext_ = new GLContext(window_);
+		renderContext_->Init();
 
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		VT_CORE_ASSERT(status, "Failed to initialize Glad!");
 
 		glfwSetWindowUserPointer(window_, &data_); // Set my window data into the glfw window to retrieve in callback
 		SetVSync(true);
@@ -120,7 +121,7 @@ namespace Violet {
 
 	void WindowsWindow::OnUpdate() {
 		glfwPollEvents();
-		glfwSwapBuffers(window_);
+		renderContext_->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enable) {
