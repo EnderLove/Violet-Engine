@@ -13,6 +13,11 @@ namespace Violet {
 		glfwMakeContextCurrent(windowHandle_);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		VT_CORE_ASSERT(status, "Failed to initialize Glad!");
+
+		VT_CORE_INFO("OPENGL_INFO:");
+		VT_CORE_INFO("VENDOR  : {0}", (char*)glGetString(GL_VENDOR));
+		VT_CORE_INFO("VERSION : {0}", (char*)glGetString(GL_VERSION));
+		VT_CORE_INFO("RENDERER: {0}", (char*)glGetString(GL_RENDERER));
 	}
 
 	void GLContext::SwapBuffers() {

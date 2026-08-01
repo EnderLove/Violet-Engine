@@ -36,6 +36,8 @@
 
 	private:
 		static Application* Instance_; // SINGLETON
+
+		unsigned int VAO_, IBO_, VBO_;
 	};
 
 	Application* CreateApplication(); // Defined in client (for entry point will be "extern")

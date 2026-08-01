@@ -2,7 +2,7 @@
 
 #include "Violet/Renderer/RenderContext.h"
 
-struct GLFWwindow; // Just to avoid including the hole lib :)
+struct GLFWwindow; // Just to avoid including the whole lib :)
 
 namespace Violet {
 	class GLContext : public RenderContext {

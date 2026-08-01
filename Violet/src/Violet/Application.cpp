@@ -21,6 +21,31 @@ namespace Violet {
 
 		ImGuiLayer_ = new ImGuiLayer();
 		PushOverlay(ImGuiLayer_);
+		
+		glGenVertexArrays(1, &VAO_);
+		glBindVertexArray(VAO_);
+		glEnableVertexAttribArray(0);
+		
+		glGenBuffers(1, &VBO_);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO_);
+		
+		glGenBuffers(1, &IBO_);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO_);
+
+		float vertices[9] = {
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.0f,  0.5f, 0.0f
+		};
+
+		unsigned int indices[3] = { 0, 1, 2 };
+		
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		
+		
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	}
 
 	Application::~Application() {}
@@ -47,8 +72,11 @@ namespace Violet {
 
 	void Application::Run() {
 		while (running_) {
-			glClearColor(0.5f, 0.0f, 0.7f, 1.0f); // VIOLET
+			glClearColor(0.4f, 0.0f, 0.5f, 1.0f); // VIOLET
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			glBindVertexArray(VAO_);
+			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
 			ImGuiLayer_->Begin();
 			for (Layer* layer : layerStack_) layer->OnImGuiRender(); // Iteration across all layers from the application stack for update
