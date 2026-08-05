@@ -46,6 +46,33 @@ namespace Violet {
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+		std::string vertexSource = R"(
+			#version 330 core
+
+			layout(location = 0) in vec3 aPos;
+
+			out vec3 vColor;
+
+			void main(){
+				gl_Position = vec4(aPos, 1.0);
+				vColor = aPos + vec3(0.5);
+			}	
+		)";
+
+		std::string fragmentSource = R"(
+			#version 330 core
+
+			layout(location = 0) out vec4 aColor;
+
+			in vec3 vColor;			
+
+			void main(){
+				aColor = vec4(vColor, 1.0);
+			}	
+		)";
+
+		shader_ = new Shader(vertexSource, fragmentSource);
 	}
 
 	Application::~Application() {}
@@ -72,9 +99,10 @@ namespace Violet {
 
 	void Application::Run() {
 		while (running_) {
-			glClearColor(0.4f, 0.0f, 0.5f, 1.0f); // VIOLET
+			glClearColor(0.2f, 0.2f, 0.2f, 1.0f); // VIOLET
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			shader_->Bind();
 			glBindVertexArray(VAO_);
 			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 

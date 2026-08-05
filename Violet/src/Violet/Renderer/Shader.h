@@ -12,6 +12,6 @@ namespace Violet {
 		void Unbind();
 
 	private:
-		unsigned int ShaderID_;
+		unsigned int renderID_;
 	};
 }

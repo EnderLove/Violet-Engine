@@ -6,6 +6,8 @@
 #include "Events/ApplicationEvent.h" // need vtpch.h (Window.h)
 #include "LayerStack.h"
 
+#include "Renderer/Shader.h"
+
 #include "ImGui/ImGuiLayer.h"
 
  namespace Violet {
@@ -33,6 +35,8 @@
 		bool OnWindowCloseEvent(WindowCloseEvent& e);
 
 		LayerStack layerStack_;
+
+		Shader* shader_;
 
 	private:
 		static Application* Instance_; // SINGLETON
