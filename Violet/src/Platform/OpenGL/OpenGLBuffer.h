@@ -14,4 +14,19 @@ namespace Violet {
 	private:
 		unsigned int renderID_;
 	};
+
+	class OpenGLIndexBuffer : public IndexBuffer {
+	public:
+		OpenGLIndexBuffer(unsigned int* vertices, unsigned int count);
+		virtual ~OpenGLIndexBuffer();
+
+		virtual void Bind() const override;
+		virtual void Unbind() const override;
+
+		virtual unsigned int GetCount() const override { return indexCount_; }
+
+	private:
+		unsigned int indexCount_;
+		unsigned int renderID_;
+	};
 }

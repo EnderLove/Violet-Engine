@@ -26,12 +26,6 @@ namespace Violet {
 		glBindVertexArray(VAO_);
 		glEnableVertexAttribArray(0);
 		
-		glGenBuffers(1, &VBO_);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO_);
-		
-		glGenBuffers(1, &IBO_);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO_);
-
 		float vertices[9] = {
 			-0.5f, -0.5f, 0.0f,
 			 0.5f, -0.5f, 0.0f,
@@ -39,13 +33,11 @@ namespace Violet {
 		};
 
 		unsigned int indices[3] = { 0, 1, 2 };
-		
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		
+
+		vertexBuffer_.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		indexBuffer_.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
 		
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
-
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 		std::string vertexSource = R"(
 			#version 330 core
@@ -68,11 +60,11 @@ namespace Violet {
 			in vec3 vColor;			
 
 			void main(){
-				aColor = vec4(vColor, 1.0);
+				aColor = vec4(gl_FragCoord.x * vColor.x, gl_FragCoord.y * vColor.y, gl_FragCoord.z * vColor.z, 1.0);
 			}	
 		)";
 
-		shader_ = new Shader(vertexSource, fragmentSource);
+		shader_.reset(new Shader(vertexSource, fragmentSource));
 	}
 
 	Application::~Application() {}
@@ -104,7 +96,7 @@ namespace Violet {
 
 			shader_->Bind();
 			glBindVertexArray(VAO_);
-			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+			glDrawElements(GL_TRIANGLES, indexBuffer_->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			ImGuiLayer_->Begin();
 			for (Layer* layer : layerStack_) layer->OnImGuiRender(); // Iteration across all layers from the application stack for update
