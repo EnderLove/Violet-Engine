@@ -6,6 +6,9 @@
 #include "Events/ApplicationEvent.h" // need vtpch.h (Window.h)
 #include "LayerStack.h"
 
+#include "Renderer/Shader.h"
+#include "Renderer/RenderBuffer.h"
+
 #include "ImGui/ImGuiLayer.h"
 
  namespace Violet {
@@ -25,8 +28,8 @@
 		inline Window& GetWindow() { return *window_; } // This is not the native window, just return the ptr of the instanced window class
 
 	private:
-		std::unique_ptr<Window> window_; // Change to raw prob
-		ImGuiLayer* ImGuiLayer_;
+		std::unique_ptr<Window> window_;
+		ImGuiLayer* ImGuiLayer_; // The layer stays raw... The stack will manage this :D
 
 		bool running_ = true;
 
@@ -34,8 +37,15 @@
 
 		LayerStack layerStack_;
 
+		//Shader* shader_; // Unique looks better for ownership tbh
+		std::unique_ptr<Shader>       shader_;
+		std::unique_ptr<VertexBuffer> vertexBuffer_;
+		std::unique_ptr<IndexBuffer>  indexBuffer_;
+
 	private:
 		static Application* Instance_; // SINGLETON
+
+		unsigned int VAO_;
 	};
 
 	Application* CreateApplication(); // Defined in client (for entry point will be "extern")
