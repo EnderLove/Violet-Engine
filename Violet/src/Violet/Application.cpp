@@ -64,7 +64,7 @@ namespace Violet {
 			}	
 		)";
 
-		shader_.reset(new Shader(vertexSource, fragmentSource));
+		shader_.reset(Shader::Create(vertexSource, fragmentSource));
 	}
 
 	Application::~Application() {}

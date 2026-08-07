@@ -7,8 +7,10 @@
 namespace Violet {
 	VertexBuffer* VertexBuffer::Create(float* vertices, unsigned int size) {
 		switch (Renderer::GetAPI()) {
-			case RenderAPI::NONE: VT_CORE_ASSERT(false, "RenderAPI::NONE is not supported!"); return nullptr;
-			case RenderAPI::OPENGL: return new OpenGLVertexBuffer(vertices, size);
+			case RenderAPI::NONE    : VT_CORE_ASSERT(false, "RenderAPI::NONE is not supported!"); return nullptr;
+			case RenderAPI::VULKAN  : VT_CORE_ASSERT(false, "RenderAPI::VULKAN is not supported!"); return nullptr;
+			case RenderAPI::DIRECT3D: VT_CORE_ASSERT(false, "RenderAPI::DIRECT3D is not supported!"); return nullptr;
+			case RenderAPI::OPENGL  : return new OpenGLVertexBuffer(vertices, size);
 		}
 
 		VT_CORE_ASSERT(flase, "Unknow render API!");
